@@ -2,15 +2,15 @@ import React, { Component } from "react"
 import { connect } from "react-redux";
 import md5 from "md5";
 
-import {setPassword} from '../store/actions';
+import {setPassword, setLoggedIn} from '../store/actions';
+
 
 class Login extends Component {
 
   onClickLogin = () => {
     if (md5(this.props.password) === "8fa0999540532f709fafa537818c17f1") {
       localStorage.setItem("loggedIn", "true");
-      alert("Uspesno ste se ulogovali");
-      window.location.reload();
+      this.props.setLoggedIn(true)
     } else {
       alert("Uneli ste pogresnu lozinku");
     }
@@ -18,14 +18,12 @@ class Login extends Component {
 
   onClickLogout = () => {
     localStorage.setItem("loggedIn", "false");
-    alert("Izlogovali ste se");
-    window.location.reload();
+    this.props.setLoggedIn(false)
   };
 
   render() {
-    let loggedIn = localStorage.getItem("loggedIn") === "true"
-    return (
-      loggedIn ? (
+   return (
+    this.props.loggedIn ? (
         <button onClick={this.onClickLogout}>Logout</button>
       ) : (
         <React.Fragment>
@@ -43,12 +41,13 @@ class Login extends Component {
 
 function mapStateToProps(state) {
   return {
-    password: state.get('password')
+    password: state.get('password'),
+    loggedIn: state.get('loggedIn')
   }
 }
 
 const mapDispatchToProps = {
-  setPassword, 
+  setPassword, setLoggedIn
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -15,6 +15,11 @@ export const setPassword = password => ({
   password
 })
 
+export const setLoggedIn = loggedIn => ({
+  type: 'SET_LOGGED_IN',
+  loggedIn
+})
+
 export const fetchSuccess = () => ({
   type: 'FETCH_SUCCESS',
 })

@@ -4,7 +4,9 @@ const initialState = Map({
   filmovi: List(),
   filtered: List(),
   isLoaded: false,
-  password: ""
+  password: "", 
+  loggedIn: localStorage.getItem('loggedIn') == 'true'
+
 })
 
 export const reducer = (state = initialState, action) => {
@@ -17,6 +19,8 @@ export const reducer = (state = initialState, action) => {
       return state.set('isLoaded', true)
     case 'SET_PASSWORD':
       return state.set('password', action.password)
+    case 'SET_LOGGED_IN':
+      return state.set('loggedIn', action.logged)
     case 'SORT_BY_YEAR_ASC': {
       const filtered = state.get('filtered').sort(
         (a, b) => a.godina - b.godina

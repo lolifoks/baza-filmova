@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { deleteUrl } from "../config/api";
+import { connect } from "react-redux";
 
 class Movie extends Component {
 
@@ -45,5 +46,9 @@ class Movie extends Component {
     );
   }
 }
-
-export default Movie;
+function mapStateToProps(state) {
+  return {
+    loggedIn: state.get('loggedIn')
+  }
+} 
+export default connect(mapStateToProps)(Movie);

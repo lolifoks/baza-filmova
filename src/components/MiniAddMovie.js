@@ -41,18 +41,21 @@ class MiniAddMovie extends Component {
         >
           <input
             name="movieName"
+            className="input"
             onChange={this.handleInput}
             placeholder="Add title"
             required
           />
           <input
             name="movieYear"
+            className="input"
             onChange={this.handleInput}
             placeholder="Add year"
             required
           />
           <input
             name="movieImg"
+            className="input"
             onChange={this.handleInput}
             placeholder="Add img url"
             required

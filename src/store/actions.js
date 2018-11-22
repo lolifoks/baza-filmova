@@ -1,3 +1,6 @@
+import { List } from "immutable";
+import { getUrl } from "../config/api";
+
 /* ACTION CREATORS */
 
 export const setFilmovi = filmovi => ({
@@ -17,6 +20,14 @@ export const setPassword = password => ({
 
 export const fetchSuccess = () => ({
   type: 'FETCH_SUCCESS',
+})
+
+export const fetchStart = () => ({
+  type: 'FETCH_START',
+})
+
+export const fetchFailed = () => ({
+  type: 'FETCH_FAILED',
 })
 
 export const sortByYearAsc = () => ({
@@ -39,3 +50,17 @@ export const searchMovie = fraza => ({
   type: 'SEARCH_MOVIE',
   fraza
 })
+
+/* ASYNC ACIONTS */
+
+export const fetchMovies = () => dispatch => {
+  dispatch(fetchStart())
+  return fetch(getUrl)
+    .then(response => response.json())
+    .then(filmovi => {
+      dispatch(fetchSuccess())
+      dispatch(setFilmovi(List(filmovi)))
+      dispatch(setFiltered(List(filmovi)))
+    })
+    .catch(e => dispatch(fetchFailed()))
+}

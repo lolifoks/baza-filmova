@@ -13,8 +13,12 @@ export const reducer = (state = initialState, action) => {
       return state.set('filmovi', action.filmovi)
     case 'SET_FILTERED':
       return state.set('filtered', action.filtered)
+    case 'FETCH_START':
+      return state.set('isLoaded', false)
     case 'FETCH_SUCCESS':
       return state.set('isLoaded', true)
+    case 'FETCH_FAILED':
+      return state.set('isLoaded', false)
     case 'SET_PASSWORD':
       return state.set('password', action.password)
     case 'SORT_BY_YEAR_ASC': {

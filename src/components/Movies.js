@@ -1,28 +1,22 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { List } from "immutable";
 import Filter from "./Filter";
-import { getUrl } from "../config/api";
+
 import Movie from "./Movie";
 import MiniAddMovie from "./MiniAddMovie";
 import {
   setFilmovi,
   setFiltered,
   setPassword,
-  fetchSuccess
+  fetchSuccess,
+  fetchMovies
 } from "../store/actions";
 import "./Movies.css";
 
 class Movies extends Component {
   componentDidMount() {
-    fetch(getUrl)
-      .then(response => response.json())
-      .then(filmovi => {
-        this.props.setFiltered(List(filmovi));
-        this.props.setFilmovi(List(filmovi));
-        this.props.fetchSuccess();
-      });
+    this.props.fetchMovies()
   }
 
   render() {
@@ -63,7 +57,8 @@ const mapDispatchToProps = {
   setFilmovi,
   setFiltered,
   setPassword,
-  fetchSuccess
+  fetchSuccess,
+  fetchMovies
 };
 
 export default connect(
